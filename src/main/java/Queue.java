@@ -32,7 +32,7 @@ public class Queue {
         this.checkForMessages();
     }
 
-    public Consumer registerConsumers( String name, String callbackApi, ArrayList<String> dependencyNames ) throws Exception {
+    public Consumer registerConsumer( String name, String callbackApi, ArrayList<String> dependencyNames ) throws Exception {
         if( this.consumersMap.containsKey( name ) ) {
             throw new Exception("Already Present");
         }
@@ -70,6 +70,7 @@ public class Queue {
     }
 
     public Deferred checkForMessages(){
+        if( this.queue.size() == 0 ) return null;
         if( this.isConsuming ){
             return this.currentDeferred;
         }
